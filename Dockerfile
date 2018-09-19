@@ -11,7 +11,6 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 # Add needed patches and scripts
-ADD unifi-video.patch /unifi-video.patch
 ADD run.sh /run.sh
 
 # Run all commands
@@ -29,9 +28,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14
 # Get, install and patch unifi-video
 RUN wget -q -O unifi-video.deb https://dl.ubnt.com/firmwares/ufv/v${version}/unifi-video.Ubuntu16.04_amd64.v${version}.deb && \
   dpkg -i unifi-video.deb && \
-  patch -N /usr/sbin/unifi-video /unifi-video.patch && \
   rm /unifi-video.deb && \
-  rm /unifi-video.patch && \
   chmod 755 /run.sh
 
 # Configuration and database volume
